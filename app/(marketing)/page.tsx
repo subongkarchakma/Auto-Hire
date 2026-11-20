@@ -1,0 +1,71 @@
+import { Hero } from "@/components/landing/hero"
+import { TrustStrip } from "@/components/landing/trust-strip"
+import { SectionHeading } from "@/components/shared/section-heading"
+import { siteConfig } from "@/lib/site"
+
+const reservedSections = [
+  {
+    id: "how-it-works",
+    eyebrow: "Next up",
+    title: "How Auto-Hire works",
+    description:
+      "Three steps for customers and three for owners, with a switch between both journeys.",
+  },
+  {
+    id: "why-auto-hire",
+    eyebrow: "About us",
+    title: "Why Auto-Hire",
+    description:
+      "Verified owners, clear pricing, and support that answers — the reasons to trust the marketplace.",
+  },
+  {
+    id: "contact",
+    eyebrow: "Contact",
+    title: "Talk to the team",
+    description:
+      "A contact block for questions about listings, rentals, or partnerships.",
+  },
+]
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <TrustStrip />
+
+      {reservedSections.map((section) => (
+        <section
+          key={section.id}
+          id={section.id}
+          className="scroll-mt-24 border-t border-border/70"
+        >
+          <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow={section.eyebrow}
+              title={section.title}
+              description={section.description}
+            />
+            <div className="mt-6 rounded-xl border border-dashed border-border bg-muted/30 p-6 text-sm text-muted-foreground">
+              {section.id === "contact" ? (
+                <p>
+                  Until this section is built, reach us at{" "}
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="font-medium text-brand-strong underline underline-offset-4"
+                  >
+                    {siteConfig.email}
+                  </a>
+                  .
+                </p>
+              ) : (
+                <p>
+                  This section is reserved and will be built in a later phase.
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )
+}
