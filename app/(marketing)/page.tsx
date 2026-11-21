@@ -1,5 +1,5 @@
 import { Hero } from "@/components/landing/hero"
-import { TrustStrip } from "@/components/landing/trust-strip"
+import { WhyAutoHire } from "@/components/landing/why-auto-hire"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { siteConfig } from "@/lib/site"
 
@@ -10,13 +10,6 @@ const reservedSections = [
     title: "How Auto-Hire works",
     description:
       "Three steps for customers and three for owners, with a switch between both journeys.",
-  },
-  {
-    id: "why-auto-hire",
-    eyebrow: "About us",
-    title: "Why Auto-Hire",
-    description:
-      "Verified owners, clear pricing, and support that answers — the reasons to trust the marketplace.",
   },
   {
     id: "contact",
@@ -31,7 +24,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
+      <WhyAutoHire />
 
       {reservedSections.map((section) => (
         <section
