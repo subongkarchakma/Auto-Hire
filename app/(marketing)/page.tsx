@@ -1,4 +1,6 @@
+import { FeaturedVehicles } from "@/components/landing/featured-vehicles"
 import { Hero } from "@/components/landing/hero"
+import { VehicleCategories } from "@/components/landing/vehicle-categories"
 import { WhyAutoHire } from "@/components/landing/why-auto-hire"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { siteConfig } from "@/lib/site"
@@ -25,6 +27,8 @@ export default function HomePage() {
     <>
       <Hero />
       <WhyAutoHire />
+      <VehicleCategories />
+      <FeaturedVehicles />
 
       {reservedSections.map((section) => (
         <section
