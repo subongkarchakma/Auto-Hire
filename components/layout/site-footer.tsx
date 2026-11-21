@@ -58,7 +58,7 @@ export function SiteFooter() {
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p>Built as a learning project. Not a live rental service.</p>
+          {/* <p>Built as a learning project. Not a live rental service.</p> */}
         </div>
       </div>
     </footer>

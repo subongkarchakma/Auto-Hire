@@ -19,7 +19,7 @@ export const siteConfig = {
     "A marketplace that connects vehicle owners with customers: browse cars, compare daily rates, and book with confidence.",
   email: "hello@auto-hire.example",
   demoNotice:
-    "Demo project — listings, prices, and copy are illustrative. No real bookings or payments are processed.",
+    "Demo project — listings, models and copy are illustrative. No real bookings or payments are processed.",
   nav: [
     { label: "Home", href: "/" },
     { label: "Browse Vehicles", href: "/vehicles" },

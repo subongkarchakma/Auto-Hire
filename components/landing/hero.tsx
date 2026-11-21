@@ -15,7 +15,7 @@ export function Hero() {
       <section className="relative isolate overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[radial-gradient(60%_60%_at_50%_0%,var(--brand-soft),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-144 bg-[radial-gradient(60%_60%_at_50%_0%,var(--brand-soft),transparent_70%)]"
         />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-12 pb-24 sm:px-6 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:px-8 lg:pt-20 lg:pb-28">
