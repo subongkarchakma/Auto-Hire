@@ -2,6 +2,7 @@ import Image from "next/image"
 import { ArrowRightIcon, ShieldCheckIcon } from "lucide-react"
 
 import { SearchCard } from "@/components/landing/search-card"
+import { Reveal } from "@/components/motion/reveal"
 import { ButtonLink } from "@/components/shared/button-link"
 import { Badge } from "@/components/ui/badge"
 import { siteConfig } from "@/lib/site"
@@ -20,37 +21,49 @@ export function Hero() {
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-12 pb-24 sm:px-6 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:px-8 lg:pt-20 lg:pb-28">
           <div>
-            <Badge
-              variant="outline"
-              className="border-brand/30 bg-brand-soft px-2.5 text-brand-strong"
+            <Reveal immediate>
+              <Badge
+                variant="outline"
+                className="border-brand/30 bg-brand-soft px-2.5 text-brand-strong"
+              >
+                Marketplace preview
+              </Badge>
+            </Reveal>
+
+            <Reveal immediate delay={0.06} className="mt-6">
+              <h1 className="font-heading text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+                {siteConfig.tagline}
+              </h1>
+            </Reveal>
+
+            <Reveal immediate delay={0.12} className="mt-5">
+              <p className="max-w-xl text-lg text-pretty text-muted-foreground">
+                {siteConfig.description}
+              </p>
+            </Reveal>
+
+            <Reveal
+              immediate
+              delay={0.18}
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
-              Marketplace preview
-            </Badge>
-
-            <h1 className="mt-6 font-heading text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
-              {siteConfig.tagline}
-            </h1>
-
-            <p className="mt-5 max-w-xl text-lg text-pretty text-muted-foreground">
-              {siteConfig.description}
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/vehicles" variant="brand" size="xl">
                 Browse vehicles
                 <ArrowRightIcon aria-hidden />
               </ButtonLink>
-              <ButtonLink href="/how-it-works" variant="outline" size="xl">
+              <ButtonLink href="/#how-it-works" variant="outline" size="xl">
                 How it works
               </ButtonLink>
-            </div>
+            </Reveal>
 
-            <p className="mt-5 max-w-md text-xs text-muted-foreground">
-              {siteConfig.demoNotice}
-            </p>
+            <Reveal immediate delay={0.24} className="mt-5">
+              <p className="max-w-md text-xs text-muted-foreground">
+                {siteConfig.demoNotice}
+              </p>
+            </Reveal>
           </div>
 
-          <div className="relative">
+          <Reveal immediate delay={0.1} scale={1.03} className="relative">
             <div className="relative aspect-4/3 overflow-hidden rounded-3xl shadow-2xl ring-1 shadow-foreground/10 ring-foreground/10">
               <Image
                 src={heroImage}
@@ -75,13 +88,18 @@ export function Hero() {
               </span>
               Verified owners
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      <div className="relative z-10 mx-auto -mt-12 mb-16 w-full max-w-6xl px-4 sm:px-6 lg:-mt-16 lg:mb-20 lg:px-8">
+      <Reveal
+        immediate
+        delay={0.28}
+        offset={24}
+        className="relative z-10 mx-auto -mt-12 mb-16 w-full max-w-6xl px-4 sm:px-6 lg:-mt-16 lg:mb-20 lg:px-8"
+      >
         <SearchCard />
-      </div>
+      </Reveal>
     </>
   )
 }

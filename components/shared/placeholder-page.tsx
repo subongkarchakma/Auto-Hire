@@ -31,7 +31,7 @@ export function PlaceholderPage({
     <section className="relative isolate overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(55%_60%_at_50%_0%,var(--brand-soft),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-112 bg-[radial-gradient(55%_60%_at_50%_0%,var(--brand-soft),transparent_70%)]"
       />
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-20 text-center sm:px-6 sm:py-28">
         <Badge

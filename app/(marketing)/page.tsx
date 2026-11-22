@@ -1,18 +1,12 @@
 import { FeaturedVehicles } from "@/components/landing/featured-vehicles"
 import { Hero } from "@/components/landing/hero"
+import { HowItWorks } from "@/components/landing/how-it-works"
 import { VehicleCategories } from "@/components/landing/vehicle-categories"
 import { WhyAutoHire } from "@/components/landing/why-auto-hire"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { siteConfig } from "@/lib/site"
 
 const reservedSections = [
-  {
-    id: "how-it-works",
-    eyebrow: "Next up",
-    title: "How Auto-Hire works",
-    description:
-      "Three steps for customers and three for owners, with a switch between both journeys.",
-  },
   {
     id: "contact",
     eyebrow: "Contact",
@@ -29,6 +23,7 @@ export default function HomePage() {
       <WhyAutoHire />
       <VehicleCategories />
       <FeaturedVehicles />
+      <HowItWorks />
 
       {reservedSections.map((section) => (
         <section

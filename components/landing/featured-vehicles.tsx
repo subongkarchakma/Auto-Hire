@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "lucide-react"
 
+import { Reveal } from "@/components/motion/reveal"
 import { ButtonLink } from "@/components/shared/button-link"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { VehicleCard } from "@/components/vehicles/vehicle-card"
@@ -34,9 +35,11 @@ export function FeaturedVehicles() {
         </p>
 
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredVehicles.map((vehicle) => (
+          {featuredVehicles.map((vehicle, index) => (
             <li key={vehicle.id} className="h-full">
-              <VehicleCard vehicle={vehicle} />
+              <Reveal delay={index * 0.08} amount={0.15} className="h-full">
+                <VehicleCard vehicle={vehicle} />
+              </Reveal>
             </li>
           ))}
         </ul>
