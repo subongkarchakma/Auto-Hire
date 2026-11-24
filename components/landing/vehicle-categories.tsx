@@ -43,7 +43,13 @@ export function VehicleCategories() {
 
             return (
               <li key={value} className="h-full">
-                <Reveal delay={index * 0.06} amount={0.15} className="h-full">
+                <Reveal
+                  once={false}
+                  delay={index * 0.13}
+                  scale={0.96}
+                  amount={0.25}
+                  className="h-full"
+                >
                   <Link
                     href="/vehicles"
                     className="group flex h-full flex-col items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 text-center shadow-sm ring-1 ring-foreground/5 transition-colors outline-none hover:border-brand/50 hover:bg-brand-soft/40 focus-visible:ring-3 focus-visible:ring-ring/50"

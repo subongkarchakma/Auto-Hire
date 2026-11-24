@@ -9,20 +9,10 @@ import {
 
 import { ButtonLink } from "@/components/shared/button-link"
 import { categoryLabels } from "@/lib/data/vehicles"
-import type { FuelType, Transmission, Vehicle } from "@/lib/types/vehicle"
+import { formatShortDate, formatUsd } from "@/lib/format"
+import type { Vehicle } from "@/lib/types/vehicle"
 import { cn } from "@/lib/utils"
-
-const transmissionLabels: Record<Transmission, string> = {
-  automatic: "Automatic",
-  manual: "Manual",
-}
-
-const fuelLabels: Record<FuelType, string> = {
-  petrol: "Petrol",
-  diesel: "Diesel",
-  hybrid: "Hybrid",
-  electric: "Electric",
-}
+import { fuelLabels, transmissionLabels } from "@/lib/vehicle-labels"
 
 type VehicleCardProps = {
   vehicle: Vehicle
@@ -64,6 +54,14 @@ export function VehicleCard({ vehicle, className }: VehicleCardProps) {
           <span className="text-muted-foreground">({vehicle.reviewCount})</span>
           <span className="sr-only"> out of 5, illustrative rating</span>
         </span>
+
+        {!vehicle.available ? (
+          <span className="absolute bottom-3 left-3 rounded-full bg-background/85 px-2.5 py-1 text-[11px] font-medium text-foreground backdrop-blur">
+            {vehicle.availableFrom
+              ? `Available from ${formatShortDate(vehicle.availableFrom)}`
+              : "Currently unavailable"}
+          </span>
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
@@ -95,12 +93,12 @@ export function VehicleCard({ vehicle, className }: VehicleCardProps) {
         <div className="mt-auto flex items-end justify-between gap-3 pt-1">
           <p className="flex items-baseline gap-1">
             <span className="font-heading text-xl font-semibold">
-              ${vehicle.pricePerDay}
+              {formatUsd(vehicle.pricePerDay)}
             </span>
             <span className="text-xs text-muted-foreground">/ day</span>
           </p>
           <ButtonLink
-            href="/sign-in"
+            href={`/vehicles/${vehicle.id}`}
             variant="outline"
             size="sm"
             className="h-10 px-3.5"

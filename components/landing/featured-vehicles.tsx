@@ -37,7 +37,13 @@ export function FeaturedVehicles() {
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featuredVehicles.map((vehicle, index) => (
             <li key={vehicle.id} className="h-full">
-              <Reveal delay={index * 0.08} amount={0.15} className="h-full">
+              <Reveal
+                once={false}
+                delay={index * 0.14}
+                scale={0.97}
+                amount={0.25}
+                className="h-full"
+              >
                 <VehicleCard vehicle={vehicle} />
               </Reveal>
             </li>

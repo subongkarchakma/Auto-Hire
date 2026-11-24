@@ -66,6 +66,7 @@ export default function RegisterPage() {
       );
       redirect('/');
     }
+    console.log(data);
   };
 
   return (

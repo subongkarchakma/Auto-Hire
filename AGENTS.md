@@ -39,6 +39,7 @@ npm run format     # prettier --write on **/*.{ts,tsx}
 - Navigation CTAs use `components/shared/button-link.tsx` (Next `Link` + `buttonVariants`). Do not use `<Button render={<Link />} />`: Base UI renders an `<a role="button">` and logs a dev warning.
 - Dark mode is class-based via `next-themes` in `components/theme-provider.tsx`; pressing `d` outside inputs toggles it.
 - Marketing routes live in `app/(marketing)/` with a shared header/footer layout. Landing anchors are `/#how-it-works`, `/#why-auto-hire`, `/#contact`; every target needs `scroll-mt-24`, and `<html data-scroll-behavior="smooth">` must stay or Next 16 warns about smooth scrolling.
+- Entrance animations use the client `Reveal` wrapper in `components/motion/reveal.tsx` (Framer Motion). Wrap individual blocks (headings, cards, images) and keep sections as Server Components; it switches animations off under `prefers-reduced-motion`.
 
 ## Auth & database
 
