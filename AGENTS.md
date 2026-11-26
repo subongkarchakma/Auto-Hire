@@ -43,10 +43,11 @@ npm run format     # prettier --write on **/*.{ts,tsx}
 
 ## Auth & database
 
-- Server config: `lib/auth.ts` (better-auth: email+password, Google, MongoDB adapter). Client: `lib/auth-client.ts`. Handler: `app/api/auth/[...all]/route.ts` serves `/api/auth/*`.
-- MongoDB URI is hardcoded in `lib/auth.ts` (`mongodb://localhost:27017`, db `Auto-Hire`) and the client is created at module load — a local `mongod` must be running or any route importing `auth` breaks.
-- `.env` is gitignored. Required keys: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`. The Google keys are currently absent, so Google sign-in fails at runtime; only email/password works.
-- Known bug in `lib/auth-client.ts`: `signIn`/`signUp`/`useSession` come from a second `createAuthClient()` call, so the configured `baseURL` is ignored. Use `authClient` for those calls (or fix the exports).
+- Server config: `lib/auth.ts` (better-auth: email+password, MongoDB adapter; the Google provider block is commented out until OAuth keys exist). Client: `lib/auth-client.ts`. Handler: `app/api/auth/[...all]/route.ts` serves `/api/auth/*`.
+- MongoDB comes from `BETTER_AUTH_DB_URI` in `.env` (currently an Atlas connection string), database `Auto-Hire`. The client is created at module load, so a missing or unreachable URI breaks any route importing `auth`; session checks fail closed with a sign-in error state.
+- `.env` is gitignored. Required keys: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BETTER_AUTH_DB_URI`. `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are only needed once the commented-out Google provider is re-enabled; until then the Google button reports that the provider is unavailable.
+- `lib/auth-client.ts` exports `authClient`, `signIn`, `signUp`, and `useSession` from a single configured `createAuthClient()` call, so the configured `baseURL` applies everywhere. Do not add a second client instance.
+- `/vehicles` is public; `/vehicles/[id]` is protected by `proxy.ts` (cookie presence only) plus `requireSession()` in the page (`lib/auth/session.ts`), which distinguishes "no session" from "auth service unavailable". `next` redirects go through `safeNextPath()` in `lib/safe-redirect.ts`.
 
 ## Meta
 

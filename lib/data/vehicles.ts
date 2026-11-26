@@ -189,7 +189,7 @@ export const vehicles: Vehicle[] = [
     category: "electric",
     imageUrl: unsplashPhoto("photo-1606016159991-dfe4f2746ad5"),
     imageAlt: "White Tesla Model 3 driving on a highway",
-    galleryImages: [],
+    galleryImages: [unsplashPhoto("photo-1560958089-b8a1929cea89")],
     seats: 5,
     transmission: "automatic",
     fuel: "electric",

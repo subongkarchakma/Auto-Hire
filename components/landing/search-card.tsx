@@ -106,7 +106,8 @@ export function SearchCard() {
       return
     }
 
-    // Preview only: no query is sent and /vehicles is still a placeholder.
+    // The catalogue applies its own URL filters; dates are not used yet, so
+    // this preview only validates them and opens the full listing.
     router.push("/vehicles")
   }
 
@@ -230,8 +231,8 @@ export function SearchCard() {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          Preview only — search results, availability, and filters arrive in a
-          later phase.
+          Dates aren&apos;t used yet — this preview opens the catalogue, where
+          you can filter by body type, location, and daily price.
         </p>
       </form>
     </div>

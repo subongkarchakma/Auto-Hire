@@ -1,76 +1,76 @@
-'use client';
+"use client"
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card"
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
-import { authClient } from '@/lib/auth-client';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { authClient } from "@/lib/auth-client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { toast } from "sonner"
 
 export default function RegisterPage() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("")
+  const router = useRouter()
 
   const passwordRules = {
     uppercase: /[A-Z]/.test(password),
     lowercase: /[a-z]/.test(password),
     minLength: password.length >= 6,
-  };
+  }
   const handleEmailSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget)
 
     const user = Object.fromEntries(formData.entries()) as {
-      name: string;
-      image: string;
-      email: string;
-      password: string;
-    };
+      name: string
+      image: string
+      email: string
+      password: string
+    }
 
     // Password validation
-    const hasUppercase = /[A-Z]/.test(user.password);
-    const hasLowercase = /[a-z]/.test(user.password);
-    const hasMinLength = user.password.length >= 6;
-
-    if (!hasUppercase || !hasLowercase || !hasMinLength) {
-      toast.error('Please meet all password requirements.');
-      return;
+    if (
+      !passwordRules.uppercase ||
+      !passwordRules.lowercase ||
+      !passwordRules.minLength
+    ) {
+      toast.error("Please meet all password requirements.")
+      return
     }
 
     const { data, error } = await authClient.signUp.email({
       ...user,
-    });
+    })
 
     if (error) {
-      toast.error(error.message);
-      return;
+      toast.error(error.message)
+      return
     }
 
     if (data) {
       toast.success(
-        'Account registered successfully! Welcome to Better Together!',
-      );
-      redirect('/');
+        "Account registered successfully! Welcome to Auto-Hire!"
+      )
+      router.push("/")
     }
-    console.log(data);
-  };
+  }
 
   return (
-    <div className={'flex flex-col gap-6 max-w-3xl mx-auto my-8'}>
+    <div className={"mx-auto my-8 flex max-w-3xl flex-col gap-6"}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
@@ -78,8 +78,7 @@ export default function RegisterPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleEmailSignUp}>
-            <FieldGroup>            
-
+            <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="name">Name</FieldLabel>
                 <Input
@@ -128,8 +127,8 @@ export default function RegisterPage() {
                   <p
                     className={
                       passwordRules.uppercase
-                        ? 'text-green-600'
-                        : 'text-gray-400'
+                        ? "text-green-600"
+                        : "text-gray-400"
                     }
                   >
                     ✓ At least one uppercase letter (A-Z)
@@ -138,8 +137,8 @@ export default function RegisterPage() {
                   <p
                     className={
                       passwordRules.lowercase
-                        ? 'text-green-600'
-                        : 'text-gray-400'
+                        ? "text-green-600"
+                        : "text-gray-400"
                     }
                   >
                     ✓ At least one lowercase letter (a-z)
@@ -148,8 +147,8 @@ export default function RegisterPage() {
                   <p
                     className={
                       passwordRules.minLength
-                        ? 'text-green-600'
-                        : 'text-gray-400'
+                        ? "text-green-600"
+                        : "text-gray-400"
                     }
                   >
                     ✓ Minimum 6 characters
@@ -168,9 +167,9 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
+        By clicking Register, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </FieldDescription>
     </div>
-  );
+  )
 }

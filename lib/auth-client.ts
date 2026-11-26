@@ -5,8 +5,4 @@ export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
 })
 
-/**
- * Re-export from the configured client. Calling `createAuthClient()` a second
- * time (as this file used to) drops `baseURL` and any future client plugins.
- */
 export const { signIn, signUp, useSession } = authClient

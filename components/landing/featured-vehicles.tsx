@@ -21,7 +21,7 @@ export function FeaturedVehicles() {
           <SectionHeading
             eyebrow="Featured"
             title="Featured vehicles"
-            description="Six approved listings from owners on the platform, ready for your next trip."
+            description="Six sample listings from the catalogue, ready for your next trip."
           />
           <ButtonLink href="/vehicles" variant="outline">
             Browse all vehicles
