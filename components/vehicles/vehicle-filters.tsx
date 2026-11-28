@@ -157,7 +157,7 @@ export function VehicleFilters({
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Make, model, or city"
+              placeholder="Name, model, or city"
               autoComplete="off"
               className="h-11 pl-9"
             />

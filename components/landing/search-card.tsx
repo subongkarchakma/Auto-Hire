@@ -11,6 +11,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { vehicleLocations } from "@/lib/data/vehicles"
 import {
   Select,
   SelectContent,
@@ -66,8 +67,9 @@ function FieldLabel({
 }
 
 /**
- * Presentational search bar. It validates dates and sends the visitor to the
- * vehicles route, but does not query or filter anything yet.
+ * Landing search bar. It validates dates, then forwards the location and body
+ * type to the catalogue's existing URL filters (`location`/`q` and `category`).
+ * Dates are validated only; the catalogue does not filter by them yet.
  */
 export function SearchCard() {
   const router = useRouter()
@@ -106,9 +108,34 @@ export function SearchCard() {
       return
     }
 
-    // The catalogue applies its own URL filters; dates are not used yet, so
-    // this preview only validates them and opens the full listing.
-    router.push("/vehicles")
+    // Match the catalogue's filter params: a known city becomes `location`
+    // (exact match, with or without the state suffix), anything else becomes
+    // the free-text `q` search.
+    const params = new URLSearchParams()
+    const trimmedLocation = location.trim()
+
+    if (trimmedLocation) {
+      const needle = trimmedLocation.toLowerCase()
+      const matches = vehicleLocations.filter((city) => {
+        const lower = city.toLowerCase()
+
+        return lower === needle || lower.split(",")[0].trim() === needle
+      })
+
+      if (matches.length === 1) {
+        params.set("location", matches[0])
+      } else {
+        params.set("q", trimmedLocation)
+      }
+    }
+
+    if (vehicleType !== "any") {
+      params.set("category", vehicleType)
+    }
+
+    const search = params.toString()
+
+    router.push(search ? `/vehicles?${search}` : "/vehicles")
   }
 
   return (
@@ -231,8 +258,8 @@ export function SearchCard() {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          Dates aren&apos;t used yet — this preview opens the catalogue, where
-          you can filter by body type, location, and daily price.
+          Dates aren&apos;t used yet — your location and vehicle type carry over
+          to the catalogue, where you can also filter by price and availability.
         </p>
       </form>
     </div>
